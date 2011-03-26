@@ -64,7 +64,7 @@ begin
     
     #open up that hella sick playlist slider, who programmed the backend code for that? some cool guy I guess.
     page.click "link=open/close"
-    sleep 1
+    sleep 2 #relaxed this a bit... probably better to wait for the element, too lazy
     
     #click on a random uke video
     name = LINK_NAMES[rand.*(LINK_NAMES.size).to_i]
@@ -72,7 +72,8 @@ begin
     page.wait_for_page_to_load "30000" #stock directive from the selenium IDE
   end
 rescue
-  email_up_in_hurr "Unexpected error!#{$!.inspect}"
+  #Doesn't currently work
+  #email_up_in_hurr "Unexpected error!#{$!.inspect}"
 ensure
   #We want to leave this open for now so we can check it out
   #page.close_current_browser_session
