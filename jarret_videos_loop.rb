@@ -59,15 +59,16 @@ page = Selenium::Client::Driver.new \
 page.start_new_browser_session
 page.open "/videos/453012-About-the-Expert-Jarret-Delos-Santos"
 begin
+  name = LINK_NAMES.first
   while "hell has yet to freeze over"
     sleep(40 + rand.*(80).to_i) #sleep for a random amount between 40 and 120 seconds
     
     #open up that hella sick playlist slider, who programmed the backend code for that? some cool guy I guess.
     page.click "link=open/close"
-    sleep 2 #relaxed this a bit... probably better to wait for the element, too lazy
+    sleep 1 #thought this needed to be relaxed but it's fine (afaik)
     
     #click on a random uke video
-    name = LINK_NAMES[rand.*(LINK_NAMES.size).to_i]
+    name = (LINK_NAMES-[name])[rand.*(LINK_NAMES.size - 1).to_i] #make sure it's not the one we're currently on
     page.click "link=#{name}"
     page.wait_for_page_to_load "30000" #stock directive from the selenium IDE
   end
